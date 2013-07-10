@@ -1,0 +1,68 @@
+package JAVAWIn8;
+
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.util.Date;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+class Armstrong  extends JFrame
+{ 
+  public static void main(String args[]) throws InterruptedException 
+  { //frame
+  Armstrong f = new Armstrong();
+	f.setVisible(false);
+	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	f.setSize(200,110);
+	f.setLayout(null);
+	f.setResizable(false);
+	
+	//label
+	JLabel show = new JLabel("");
+	show.setBounds(10, 0, f.getWidth(), 100);
+	show.setFont(new Font("Arial", 1, 18));
+	f.add(show);
+	
+    Thread timer = new Thread();
+    JOptionPane jo = new JOptionPane();
+    int h;
+    int m = 0;
+    try{
+    String s1 = jo.showInputDialog("enter integer num of hours (0-24): ");
+     h = Integer.parseInt(s1);
+    }catch(Exception e){
+    	h=0;
+    }
+    
+   
+    	try{
+    		String s2 = jo.showInputDialog("enter integer num of minutes (1-60) : ");
+    		m = Integer.parseInt(s2);
+    	}catch (Exception e){
+    			m=1;
+    	}
+    	if (m==0){m=1;}
+   		if (m >=0 && m <=60){
+   			f.setVisible(true);
+   			for (int h1=h;h1>=0;h1--){
+    			for (int m1=m-1;m1>=0;m1--){
+   					for (int s3=60;s3>0;s3--){
+   						show.setText(h1+" (H) : " + m1 + " (M) : " + s3 + " (S)");
+   						timer.sleep(1000);
+   					}
+   				}	
+   				m = 60;
+   			}	
+   			show.setText("=====Finsh=====");
+   			for (int i=1;i<=5;i++){
+   				Toolkit.getDefaultToolkit().beep();
+   				timer.sleep(500);
+   			}
+   		}
+   		else{
+   			jo.showMessageDialog(null, "you enter wrong minutes");
+   		}
+   	}
+  }
